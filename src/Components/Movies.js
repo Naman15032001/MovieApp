@@ -10,7 +10,8 @@ export default class Movies extends Component {
             hover: '',
             parr: [1],
             currPage: 1,
-            movies: []
+            movies: [],
+            favourites: []
         }
     }
 
@@ -59,11 +60,34 @@ export default class Movies extends Component {
 
     handleClick = (value) => {
 
-        if(value!==this.state.currPage){
+        if (value !== this.state.currPage) {
             this.setState({
                 currPage: value
             }, this.changeMovies)
         }
+
+    }
+
+    handleFavourites = (movie) => {
+        let oldData = JSON.parse(localStorage.getItem("movies-app") || "[]");
+
+        if (this.state.favourites.includes(movie.id)) {
+            oldData = oldData.filter((m) => m.id !== movie.id)
+        } else {
+            oldData.push(movie)
+        }
+        localStorage.setItem("movies-app", JSON.stringify(oldData));
+        console.log("nam", oldData);
+        this.handleFavouritesState();
+
+    }
+
+    handleFavouritesState = () => {
+        let oldData = JSON.parse(localStorage.getItem("movies-app") || "[]");
+        let temp = oldData.map((movie) => movie.id);
+        this.setState({
+            favourites: [...temp]
+        })
 
     }
 
@@ -91,7 +115,12 @@ export default class Movies extends Component {
                                             <div className='button-wrapper' style={{ display: "flex", width: "100%", justifyContent: "center" }}>
                                                 {
                                                     this.state.hover === movie.id &&
-                                                    <a className="btn btn-primary movies-btn">Add to favourite</a>
+                                                    <a className="btn btn-primary movies-btn" onClick={() => this.handleFavourites(movie)}>{
+                                                        this.state.favourites.includes(movie.id) ?
+                                                            "Remove from favourite"
+                                                            :
+                                                            "Add to favourite"
+                                                    }</a>
                                                 }
                                             </div>
 
