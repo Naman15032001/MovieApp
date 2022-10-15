@@ -67,6 +67,37 @@
   margin-right: 5vw;
 }
 
+.movies-list {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 1rem;
+  justify-content: center;
+}
+
+.movies-card {
+  width: 20vw;
+  margin: 1rem;
+  color: white;
+  position: relative;
+}
+
+.movies-title {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+}
+
+.movies-btn {
+  position: absolute;
+  bottom: 2rem;
+}
+
+.movies-img{
+  height: 40vh;
+  width: 20vw;
+    
+}
+
 @media screen and (max-width:480px) {
   .banner-card {
     height: 30vh;
@@ -84,5 +115,18 @@
   .banner-text {
     top: 18vh;
     left: 5vw;
+  }
+
+  .movies-card {
+    width: 40vw;
+    margin: 0.1rem
+  }
+
+  .movies-btn{
+    width: 80%;
+  }
+
+  .movies-img{
+    width: 40vw;
   }
 }
